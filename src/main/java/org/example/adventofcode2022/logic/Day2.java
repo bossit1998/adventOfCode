@@ -1,10 +1,7 @@
 package org.example.adventofcode2022.logic;
 
-
-import org.example.adventofcode2022.models.ElfInventory;
 import org.example.adventofcode2022.models.GameSet;
 import org.example.adventofcode2022.utils.MigrationUtil;
-import org.example.adventofcode2022.utils.Util;
 import org.example.utils.IOUtil;
 
 import java.util.List;
@@ -27,8 +24,6 @@ public class Day2 {
                 part2(gameSet);
 
             }
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -41,7 +36,6 @@ public class Day2 {
 //    X for Rock, Y for Paper, and Z for Scissors
 //    1 for Rock, 2 for Paper, and 3 for Scissors
 //    0 for lose, 3 for draw, and 6 for win
-
 
         String inRock = "A";
         String inPaper = "B";
@@ -59,31 +53,30 @@ public class Day2 {
         int draw = 3;
         int win = 6;
 
-
-        for(GameSet game : gameSet) {
+        for (GameSet game : gameSet) {
             if (game.getOpponent().equals(inRock)) {
                 if (game.getMe().equals(outRock)) {
-                    score+=(rock+draw);
+                    score += (rock + draw);
                 } else if (game.getMe().equals(outPaper)) {
-                    score+=(paper+win);
+                    score += (paper + win);
                 } else if (game.getMe().equals(outScissors)) {
-                    score+=(scissors+lose);
+                    score += (scissors + lose);
                 }
             } else if (game.getOpponent().equals(inPaper)) {
                 if (game.getMe().equals(outRock)) {
-                    score+=(rock+lose);
+                    score += (rock + lose);
                 } else if (game.getMe().equals(outPaper)) {
-                    score+=(paper+draw);
+                    score += (paper + draw);
                 } else if (game.getMe().equals(outScissors)) {
-                    score+=(scissors+win);
+                    score += (scissors + win);
                 }
             } else if (game.getOpponent().equals(inScissors)) {
                 if (game.getMe().equals(outRock)) {
-                    score+=(rock+win);
+                    score += (rock + win);
                 } else if (game.getMe().equals(outPaper)) {
-                    score+=(paper+lose);
+                    score += (paper + lose);
                 } else if (game.getMe().equals(outScissors)) {
-                    score+=(scissors+draw);
+                    score += (scissors + draw);
                 }
             }
         }
@@ -97,7 +90,6 @@ public class Day2 {
 //    X for lose, Y for draw, and Z for win
 //    1 for Rock, 2 for Paper, and 3 for Scissors
 //    0 for lose, 3 for draw, and 6 for win
-
 
         String inRock = "A";
         String inPaper = "B";
@@ -115,31 +107,30 @@ public class Day2 {
         int draw = 3;
         int win = 6;
 
-
-        for(GameSet game : gameSet) {
+        for (GameSet game : gameSet) {
             if (game.getOpponent().equals(inRock)) {
                 if (game.getMe().equals(outWin)) {
-                    score+=(paper+win);
+                    score += (paper + win);
                 } else if (game.getMe().equals(outDraw)) {
-                    score+=(rock+draw);
+                    score += (rock + draw);
                 } else if (game.getMe().equals(outLose)) {
-                    score+=(scissors+lose);
+                    score += (scissors + lose);
                 }
             } else if (game.getOpponent().equals(inPaper)) {
                 if (game.getMe().equals(outLose)) {
-                    score+=(rock+lose);
+                    score += (rock + lose);
                 } else if (game.getMe().equals(outDraw)) {
-                    score+=(paper+draw);
+                    score += (paper + draw);
                 } else if (game.getMe().equals(outWin)) {
-                    score+=(scissors+win);
+                    score += (scissors + win);
                 }
             } else if (game.getOpponent().equals(inScissors)) {
                 if (game.getMe().equals(outWin)) {
-                    score+=(rock+win);
+                    score += (rock + win);
                 } else if (game.getMe().equals(outLose)) {
-                    score+=(paper+lose);
+                    score += (paper + lose);
                 } else if (game.getMe().equals(outDraw)) {
-                    score+=(scissors+draw);
+                    score += (scissors + draw);
                 }
             }
         }
