@@ -8,11 +8,13 @@ import org.example.adventofcode2022.utils.Util;
 
 import java.util.List;
 
+import static org.example.utils.Constant.generalPath;
+
 public class Day1 {
 
     public static void main(String[] args) {
         try {
-            String filePath = "C:\\Users\\HP\\IdeaProjects\\AdventOfCode\\src\\main\\java\\org\\example\\adventofcode2022\\inputs\\Day1";
+            String filePath = generalPath + "Day1";
             List<String> list = IOUtil.readFileIntoList(filePath);
 
             if (list == null) {
