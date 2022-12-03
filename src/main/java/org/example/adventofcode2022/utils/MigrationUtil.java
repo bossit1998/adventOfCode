@@ -1,6 +1,7 @@
 package org.example.adventofcode2022.utils;
 
 import org.example.adventofcode2022.models.ElfInventory;
+import org.example.adventofcode2022.models.GameSet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,5 +23,20 @@ public class MigrationUtil {
             }
         }
         return elfInventoryList;
+    }
+
+    public static List<GameSet> migrateDay2(List<String> gameChoices) {
+        List<GameSet> gameSet = new ArrayList<>();
+
+        for (String set : gameChoices) {
+            String[] setAsArray = set.split(" ");
+
+            GameSet game = new GameSet();
+            game.setOpponent(setAsArray[0]);
+            game.setMe(setAsArray[1]);
+
+            gameSet.add(game);
+        }
+        return gameSet;
     }
 }
