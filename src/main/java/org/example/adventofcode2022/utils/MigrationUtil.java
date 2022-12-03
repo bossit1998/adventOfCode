@@ -2,6 +2,7 @@ package org.example.adventofcode2022.utils;
 
 import org.example.adventofcode2022.models.ElfInventory;
 import org.example.adventofcode2022.models.GameSet;
+import org.example.adventofcode2022.models.RucksackCompartments;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,5 +39,23 @@ public class MigrationUtil {
             gameSet.add(game);
         }
         return gameSet;
+    }
+
+
+    public static List<RucksackCompartments> migrateDay3(List<String> rucksackItems) {
+        List<RucksackCompartments> rucksackList = new ArrayList<>();
+
+        for (String item : rucksackItems) {
+            int itemsLength = item.length();
+            String rucksackPart1 = item.substring(0, itemsLength / 2);
+            String rucksackPart2 = item.substring(itemsLength / 2, itemsLength);
+
+            RucksackCompartments rucksack = new RucksackCompartments();
+            rucksack.setCompartment1(rucksackPart1);
+            rucksack.setCompartment2(rucksackPart2);
+
+            rucksackList.add(rucksack);
+        }
+        return rucksackList;
     }
 }
