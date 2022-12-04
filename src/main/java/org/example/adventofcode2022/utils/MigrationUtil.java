@@ -1,8 +1,6 @@
 package org.example.adventofcode2022.utils;
 
-import org.example.adventofcode2022.models.ElfInventory;
-import org.example.adventofcode2022.models.GameSet;
-import org.example.adventofcode2022.models.RucksackCompartments;
+import org.example.adventofcode2022.models.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,5 +55,30 @@ public class MigrationUtil {
             rucksackList.add(rucksack);
         }
         return rucksackList;
+    }
+
+    public static List<ElfPairs> migrateDay4(List<String> elfPairs) {
+        List<ElfPairs> elfs = new ArrayList<>();
+
+        for (String elf : elfPairs) {
+            String[] line = elf.split(",");
+            String[] scope1 = line[0].split("-");
+            String[] scope2 = line[1].split("-");
+
+            AssignmentScope assignmentScope1 = new AssignmentScope();
+            assignmentScope1.setBegin(Integer.valueOf(scope1[0]));
+            assignmentScope1.setEnd(Integer.valueOf(scope1[1]));
+
+            AssignmentScope assignmentScope2 = new AssignmentScope();
+            assignmentScope2.setBegin(Integer.valueOf(scope2[0]));
+            assignmentScope2.setEnd(Integer.valueOf(scope2[1]));
+
+            ElfPairs elfPair = new ElfPairs();
+            elfPair.setElf1(assignmentScope1);
+            elfPair.setElf2(assignmentScope2);
+
+            elfs.add(elfPair);
+        }
+        return elfs;
     }
 }
