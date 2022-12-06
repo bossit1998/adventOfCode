@@ -4,6 +4,7 @@ import org.example.adventofcode2022.models.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class MigrationUtil {
 
@@ -38,7 +39,6 @@ public class MigrationUtil {
         }
         return gameSet;
     }
-
 
     public static List<RucksackCompartments> migrateDay3(List<String> rucksackItems) {
         List<RucksackCompartments> rucksackList = new ArrayList<>();
@@ -80,5 +80,50 @@ public class MigrationUtil {
             elfs.add(elfPair);
         }
         return elfs;
+    }
+
+    public static List<Stack<String>> migrateDay5Part1(List<String> stacks) {
+        List<Stack<String>> stacksList = new ArrayList<>();
+
+        List<String> arr = new ArrayList<>();
+        arr.add("HTZD");
+        arr.add("QRWTGCS");
+        arr.add("PBFQNRCH");
+        arr.add("LCNFHZ");
+        arr.add("GLFQS");
+        arr.add("VPWZBRCS");
+        arr.add("ZFJ");
+        arr.add("DLVZRHQ");
+        arr.add("BHGNFZLD");
+
+        for (String str : arr) {
+            Stack<String> stack = new Stack<>();
+            for (int i=0; i<str.length(); i++) {
+                stack.push(String.valueOf(str.charAt(i)));
+            }
+            stacksList.add(stack);
+        }
+
+        return stacksList;
+    }
+
+    public static List<StackInstructions> migrateDay5Part2(List<String> stacks) {
+        List<StackInstructions> stackInstructions = new ArrayList<>();
+
+        int count = 0;
+        for (String stack : stacks) {
+            if (count>=10) {
+                String[] line = stack.split(" ");
+
+                StackInstructions stackInstruction = new StackInstructions();
+                stackInstruction.setAmount(Integer.valueOf(line[1]));
+                stackInstruction.setFrom(Integer.valueOf(line[3]));
+                stackInstruction.setTo(Integer.valueOf(line[5]));
+
+                stackInstructions.add(stackInstruction);
+            }
+            count++;
+        }
+        return stackInstructions;
     }
 }
