@@ -12,6 +12,7 @@ public class Tree {
     private Integer visionUp = 0;
     private Integer visionDown = 0;
     private Integer visionLeft = 0;
+    private Integer visionRight = 0;
 
     public Integer getX() {
         return x;
@@ -64,9 +65,6 @@ public class Tree {
     public void setVisionRight(Integer visionRight) {
         this.visionRight = visionRight;
     }
-
-    private Integer visionRight = 0;
-
 
     public Tree(char value, int x, int y) {
         this.value=value;

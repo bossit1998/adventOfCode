@@ -52,8 +52,10 @@ public class Day8 {
                 if (arr[i][j].getVisible()) {
                     countOfVisibleTrees++;
                 }
-                if (arr[i][j].getTotalVision()>maxVision) {
-                    maxVision=arr[i][j].getTotalVision();
+
+                Tree tr = checkTree2(list, j, i);
+                if (tr.getTotalVision()>maxVision) {
+                    maxVision=tr.getTotalVision();
                 }
             }
             System.out.println();
@@ -64,106 +66,102 @@ public class Day8 {
     }
 
     public static Tree checkTree(List<String> list, int x, int y) {
-        if (y==60 && x ==60) {
-            int dx = 0;
-        }
         Tree tree = new Tree(list.get(y).charAt(x),x, y);
-        if (x==0 || x==list.get(0).length() || y==0 || y==list.size()) {
+        if (x==0 || x==list.get(0).length() || y==0 || y==list.size()-1) {
             tree.setVisible(true);
-            System.out.print(ANSI_YELLOW + "*" + ANSI_RESET);
-//            System.out.print(ANSI_YELLOW + "tree.getValue()" + ANSI_RESET);
+//            System.out.print(ANSI_YELLOW + "*" + ANSI_RESET);
+            System.out.print(ANSI_YELLOW + tree.getValue() + ANSI_RESET);
             return tree;
         }
 
-        int cnt=0;
         for (int i=0; i<y;i++) {
-            if (list.get(y).charAt(x) >= list.get(i).charAt(x)) {
-                tree.setVisionUp(tree.getVisionUp()+1);
-            } else {
-                if (cnt==0) {
-                    tree.setVisionUp(tree.getVisionUp()+1);
-                } else {
-                    cnt++;
-                }
-            }
-
             if (list.get(y).charAt(x)<=list.get(i).charAt(x)) {
                 tree.setVisibleUp(false);
                 break;
-            } else {
-//                tree.setVisionUp(tree.getVisionUp()+1);
             }
         }
 
-        cnt=0;
         for (int i=y; i<list.size()-1;i++) {
-            if (list.get(y).charAt(x) >= list.get(i + 1).charAt(x)) {
-                tree.setVisionDown(tree.getVisionDown()+1);
-            } else {
-                if (cnt==0) {
-                    tree.setVisionDown(tree.getVisionDown()+1);
-                } else {
-                    cnt++;
-                }
-            }
             if (list.get(y).charAt(x)<=list.get(i+1).charAt(x)) {
                 tree.setVisibleDown(false);
                 break;
-            } else {
-//                tree.setVisionDown(tree.getVisionDown()+1);
             }
         }
 
-        cnt=0;
         for (int i=0; i<x;i++) {
-            if (list.get(y).charAt(x) >= list.get(y).charAt(i)) {
-                tree.setVisionLeft(tree.getVisionLeft()+1);
-            } else {
-                if (cnt==0) {
-                    tree.setVisionLeft(tree.getVisionLeft()+1);
-                } else {
-                    cnt++;
-                }
-            }
-
             if (list.get(y).charAt(x)<=list.get(y).charAt(i)) {
                 tree.setVisibleLeft(false);
                 break;
-            } else {
-//                tree.setVisionLeft(tree.getVisionLeft()+1);
             }
         }
 
-        cnt=0;
         for (int i=x; i<list.get(0).length()-1;i++) {
-            if (list.get(y).charAt(x) >= list.get(y).charAt(i + 1)) {
-                tree.setVisionRight(tree.getVisionRight()+1);
-            } else {
-                if (cnt==0) {
-                    tree.setVisionRight(tree.getVisionRight()+1);
-                } else {
-                    cnt++;
-                }
-            }
-
             if (list.get(y).charAt(x)<=list.get(y).charAt(i+1)) {
                 tree.setVisibleRight(false);
                 break;
-            } else {
-//                tree.setVisionRight(tree.getVisionRight()+1);
             }
         }
 
         if (tree.getVisibleUp() || tree.getVisibleRight()
                 || tree.getVisibleDown() || tree.getVisibleLeft()) {
             tree.setVisible(true);
-            System.out.print(ANSI_YELLOW + "*" + ANSI_RESET);
-//            System.out.print(ANSI_YELLOW + "tree.getValue()" + ANSI_RESET);
+//            System.out.print(ANSI_YELLOW + "*" + ANSI_RESET);
+            System.out.print(ANSI_YELLOW + tree.getValue() + ANSI_RESET);
         } else {
             tree.setVisible(false);
-            System.out.print(" ");
-//            System.out.print(tree.getValue());
+//            System.out.print(" ");
+            System.out.print(tree.getValue());
         }
+
+        return tree;
+    }
+
+    public static Tree checkTree2(List<String> list, int x, int y) {
+        Tree tree = new Tree(list.get(y).charAt(x),x, y);
+
+        if (x==0 || x==list.get(0).length()-1 || y==0 || y==list.size()-1) {
+            System.out.print(tree.getValue());
+            return tree;
+        }
+
+        for (int i=y-1; i>=0;i--) {
+            if (list.get(y).charAt(x) > list.get(i).charAt(x)) {
+                tree.setVisionUp(tree.getVisionUp()+1);
+            } else {
+                tree.setVisionUp(tree.getVisionUp()+1);
+                break;
+            }
+        }
+
+        for (int i=y; i<list.size()-1;i++) {
+            if (list.get(y).charAt(x) > list.get(i + 1).charAt(x)) {
+                tree.setVisionDown(tree.getVisionDown()+1);
+            } else {
+                tree.setVisionDown(tree.getVisionDown()+1);
+                break;
+            }
+        }
+
+        for (int i=x-1; i>=0;i--) {
+            if (list.get(y).charAt(x) > list.get(y).charAt(i)) {
+                tree.setVisionLeft(tree.getVisionLeft()+1);
+            } else {
+                tree.setVisionLeft(tree.getVisionLeft()+1);
+                break;
+            }
+        }
+
+        for (int i=x; i<list.get(0).length()-1;i++) {
+            if (list.get(y).charAt(x) > list.get(y).charAt(i + 1)) {
+                tree.setVisionRight(tree.getVisionRight()+1);
+            } else {
+                tree.setVisionRight(tree.getVisionRight()+1);
+                break;
+            }
+        }
+
+//        System.out.print(ANSI_YELLOW + tree.getTotalVision() + ANSI_RESET);
+        System.out.print(ANSI_YELLOW + tree.getValue() + ANSI_RESET);
 
         return tree;
     }

@@ -126,4 +126,19 @@ public class MigrationUtil {
         }
         return stackInstructions;
     }
+
+    public static List<RopeHeadMove> migrateDay9(List<String> instructions) {
+        List<RopeHeadMove> headMoves = new ArrayList<>();
+
+        for (String stack : instructions) {
+            String[] line = stack.split(" ");
+
+            RopeHeadMove ropeHeadMove = new RopeHeadMove();
+            ropeHeadMove.setDirection(line[0]);
+            ropeHeadMove.setDistance(Integer.valueOf(line[1]));
+
+            headMoves.add(ropeHeadMove);
+        }
+        return headMoves;
+    }
 }
