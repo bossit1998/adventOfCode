@@ -70,6 +70,27 @@ public class Day3 {
     }
 
     public static void part2(List<String> instructions) {
+        StringBuilder oxygenGenerator = new StringBuilder();
+        String co2Scrubber = "";
 
+        int instructionLength = instructions.get(0).length();
+
+        for (int i = 0; i < instructionLength; i++) {
+            int onesCount = 0;
+            int zerosCount = 0;
+            for (String instruction : instructions) {
+                if (instruction.charAt(i) == 1) {
+                    onesCount++;
+                } else {
+                    zerosCount++;
+                }
+            }
+
+            if(onesCount>=zerosCount) {
+                oxygenGenerator.append("1");
+            } else {
+
+            }
+        }
     }
 }

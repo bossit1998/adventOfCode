@@ -141,4 +141,71 @@ public class MigrationUtil {
         }
         return headMoves;
     }
+
+    public static List<Monkey> migrateDay11(List<String> list) {
+        List<Monkey> monkeys = new ArrayList<>();
+
+        Monkey monkey = null;
+        List<Integer> items = null;
+        for (String line : list) {
+            if (line.contains("Monkey")) {
+                if (monkey != null) {
+                    monkeys.add(monkey);
+                }
+
+                line = line.replace(":","");
+                String[] k = line.split(" ");
+
+                monkey = new Monkey();
+                monkey.setId(Integer.valueOf(k[1]));
+            } else if (line.contains("Starting items: ")) {
+                line = line.replace("  Starting items: ","");
+                line = line.replace(",","");
+                items = new ArrayList<>();
+
+                String[] itemsFromLine = line.split(" ");
+
+                for (String itemFromLine : itemsFromLine) {
+                    items.add(Integer.valueOf(itemFromLine));
+                }
+
+                if (monkey != null) {
+                    monkey.setItems(items);
+                }
+            } else if (line.contains("Operation: ")) {
+                line = line.replace("  Operation: ","");
+                line = line.replace("new = old ","");
+                String[] operationsFromLine = line.split(" ");
+
+                if (monkey != null) {
+                    monkey.setOperation(operationsFromLine[0]);
+                    monkey.setOperand(operationsFromLine[1]);
+                }
+            } else if (line.contains("Test: ")) {
+                line = line.replace("  Test: ","");
+                line = line.replace("divisible by ","");
+
+                if (monkey != null) {
+                    monkey.setDivisibleNumber(Integer.valueOf(line));
+                }
+            } else if (line.contains("If true: ")) {
+                line = line.replace("    If true: ","");
+                line = line.replace("throw to monkey ","");
+
+                if (monkey != null) {
+                    monkey.setThrowsIfTrue(Integer.valueOf(line));
+                }
+
+            } else if (line.contains("If false: ")) {
+                line = line.replace("    If false: ","");
+                line = line.replace("throw to monkey ","");
+
+                if (monkey != null) {
+                    monkey.setThrowsIfFalse(Integer.valueOf(line));
+                }
+            }
+        }
+        monkeys.add(monkey);
+        return monkeys;
+    }
 }
